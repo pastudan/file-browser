@@ -8,13 +8,24 @@
     <link rel="stylesheet" href="/static/css/global.css" />
 </head>
 <body ng-app="browserApp" ng-controller="BrowserController">
-    <header>
-        <i class="fa fa-home"></i>
-    </header>
-    <section>
+    <header class="cf">
         <ul>
-            <li ng-repeat="file in files">
-                <a href="{{file.href}}">{{file.name}}</a>
+            <li><a ng-click="navigate_path(0)" href=""><i class="fa fa-home"></i></a></li>
+            <li ng-repeat="directory in path track by $index">
+                <a ng-click="navigate_path($index+1)" href="">{{directory}}</a>
+            </li>
+        </ul>
+
+    </header>
+    <section class="directory-index">
+        <ul>
+            <li class="item directory" ng-repeat="directory in items.directories">
+                <i class="fa fa-folder-open fa-fw"></i>
+                <a ng-click="open_directory(directory, true)" href="">{{directory}}</a>
+            </li>
+            <li class="item file" ng-repeat="file in items.files">
+                <i class="fa fa-file fa-fw"></i>
+                <a target="_blank" href="/download/{{path.concat(file).join('/')}}">{{file}}</a>
             </li>
         </ul>
     </section>

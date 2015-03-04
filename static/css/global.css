@@ -1,17 +1,50 @@
+/* styles */
+
+html,body{
+    height: 100%;
+    overflow: hidden;
+}
 body{
-    padding: 20px;
     font-family: "Lucida Grande", sans-serif;
+    padding: 20px;
 }
 header{
     border-bottom: 1px solid #ccc;
     padding: 0 20px 20px 20px;
 }
+header li{
+    float: left;
+    margin: 0 5px 0 6px;
+    font-weight: bold;
+}
+header li:not(:first-child):before {
+    content: '/';
+    color: #999;
+}
+.directory-index{
+    padding: 20px 20px 150px 20px;
+    
+    overflow-y: scroll;
+    height: 100%;
+}
+.directory-index .item{
+    padding: 5px 0;
+}
+.directory-index .directory{
+    color: #d7dc89
+}
+.directory-index .file{
+    color: #e0e0e0
+}
 footer{
     position: absolute;
+    background-color: rgba(255,255,255,0.85);
+    border-top: 1px solid #ccc;
     font-size: 10px;
-    color: lightgray;
+    color: #b5b5b5;
     bottom: 0;
     padding: 20px;
+    width: calc(100% - 40px);
 }
 a{
     text-decoration: none;

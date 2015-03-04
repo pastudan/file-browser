@@ -1,19 +1,31 @@
 angular.module('browserApp', [])
     .service('dataService', function($http) {
-        this.get_files = function(directory){
-            return $http.get('/api/v1.0/files/'+directory);
+        this.get_files = function(fullPath){
+            return $http.get('/api/v1.0/files/'+fullPath);
         }
     })
 
     .controller('BrowserController', function($scope, dataService) {
 
-        $scope.get_files = function(directory){
-            directory = directory || ''
-            dataService.get_files(directory).then(function(files) {
-                console.log(files.data)
-                $scope.files = files.data;
+        $scope.path = [];
+
+        $scope.navigate_path = function(index){
+            $scope.path = $scope.path.slice(0, index);
+            var fullPath = $scope.path.join('/');
+            $scope.open_directory(fullPath)
+        };
+
+        $scope.open_directory = function(directory, pushToPath){
+            //todo: history.pushState so  back button works
+            directory = directory || '';
+            if (directory != '' && pushToPath){
+                $scope.path.push(directory)
+            }
+            var fullPath = $scope.path.join('/');
+            dataService.get_files(fullPath).then(function(items) {
+                $scope.items = items.data;
             });
         };
 
-        $scope.get_files()
+        $scope.open_directory()
     });
