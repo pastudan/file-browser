@@ -5,11 +5,27 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
     <script>
         angular.module('browserApp', [])
-                .controller('BrowserController', ['$scope', function($scope) {
+                .service('dataService', function($http) {
+                    this.get_files = function(directory){
+                        return $http.get('/api/v1.0/files/'+directory);
+                    }
+                })
+
+                .controller('BrowserController', function($scope, dataService) {
                     $scope.files = [
                         {name: 'test', href: '/test'},
                         {name: 'dan', href: '/dan'}];
-                }]);
+
+                    $scope.get_files = function(directory){
+                        directory = directory || ''
+                        dataService.get_files(directory).then(function(files) {
+                            console.log(files.data)
+                            $scope.files = files.data;
+                        });
+                    };
+
+                    $scope.get_files()
+                });
     </script>
 </head>
 <body ng-app="browserApp" ng-controller="BrowserController">

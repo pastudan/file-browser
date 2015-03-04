@@ -19,11 +19,10 @@ def send_js(path):
 
 
 # API
-@app.route('/browser/api/v1.0/files/', methods=['GET'], defaults={'path': ''})
-@app.route('/browser/api/v1.0/files/<path:path>', methods=['GET'])
+@app.route('/api/v1.0/files/', methods=['GET'], defaults={'path': ''})
+@app.route('/api/v1.0/files/<path:path>', methods=['GET'])
 def get_files(path):
     path = os.path.expanduser('~/'+path+'/*')
-    print path
     return json.dumps(glob(path))
 
 if __name__ == '__main__':
