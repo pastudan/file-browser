@@ -20,11 +20,11 @@
     </header>
     <section class="directory-index">
         <ul>
-            <li class="item directory" ng-class="{'hidden-item':(directory[0] == '.')}" ng-repeat="directory in items.directories" ng-show="directory[0] != '.' || (showHidden && directory[0] == '.')">
+            <li class="item directory" ng-class="{'hidden-item':(directory[0] == '.')}" ng-repeat="directory in items.directories | orderBy : directory" ng-show="directory[0] != '.' || (showHidden && directory[0] == '.')">
                 <i class="fa fa-folder-open fa-fw"></i>
                 <a ng-click="open_directory(directory, true)" href="">{{directory}}</a>
             </li>
-            <li class="item file" ng-class="{'hidden-item':(file[0] == '.')}"  ng-repeat="file in items.files" ng-show="file[0] != '.' || (showHidden && file[0] == '.')">
+            <li class="item file" ng-class="{'hidden-item':(file[0] == '.')}"  ng-repeat="file in items.files | orderBy : file" ng-show="file[0] != '.' || (showHidden && file[0] == '.')">
                 <i class="fa fa-file fa-fw"></i>
                 <a target="_blank" href="/download/{{path.concat(file).join('/')}}">{{file}}</a>
             </li>

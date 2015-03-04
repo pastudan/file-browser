@@ -50,9 +50,11 @@ header .button:hover{
 }
 .directory-index{
     padding: 20px 20px 150px 20px;
-    
     overflow-y: scroll;
     height: 100%;
+}
+.directory-index ul{
+    margin-bottom: 150px;
 }
 .directory-index .item{
     padding: 5px 0;
