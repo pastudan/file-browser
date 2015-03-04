@@ -15,15 +15,16 @@
                 <a ng-click="navigate_path($index+1)" href="">{{directory}}</a>
             </li>
         </ul>
-
+        <a class="button" href="/zip/{{path.join('/')}}.zip"><i class="fa fa-cloud-download"></i> Download .zip</a>
+        <a class="toggle-hidden" href="" ng-click="showHidden = !showHidden"><i class="fa fa-eye-slash"></i> toggle hidden</a>
     </header>
     <section class="directory-index">
         <ul>
-            <li class="item directory" ng-repeat="directory in items.directories">
+            <li class="item directory" ng-class="{'hidden-item':(directory[0] == '.')}" ng-repeat="directory in items.directories" ng-show="directory[0] != '.' || (showHidden && directory[0] == '.')">
                 <i class="fa fa-folder-open fa-fw"></i>
                 <a ng-click="open_directory(directory, true)" href="">{{directory}}</a>
             </li>
-            <li class="item file" ng-repeat="file in items.files">
+            <li class="item file" ng-class="{'hidden-item':(file[0] == '.')}"  ng-repeat="file in items.files" ng-show="file[0] != '.' || (showHidden && file[0] == '.')">
                 <i class="fa fa-file fa-fw"></i>
                 <a target="_blank" href="/download/{{path.concat(file).join('/')}}">{{file}}</a>
             </li>

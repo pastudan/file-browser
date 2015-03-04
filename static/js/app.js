@@ -8,6 +8,7 @@ angular.module('browserApp', [])
     .controller('BrowserController', function($scope, dataService) {
 
         $scope.path = [];
+        $scope.showHidden = false;
 
         $scope.navigate_path = function(index){
             $scope.path = $scope.path.slice(0, index);
